@@ -24,8 +24,7 @@ async def async_setup_entry(
     """Add a binary sensor for each yes/no property."""
     coordinator = entry.runtime_data
     async_add_entities(
-        DreameDehumBinarySensor(coordinator, prop)
-        for prop in coordinator.device.profile.of_kind(Kind.BINARY_SENSOR)
+        DreameDehumBinarySensor(coordinator, prop) for prop in coordinator.device.profile.of_kind(Kind.BINARY_SENSOR)
     )
 
 
