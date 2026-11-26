@@ -1,0 +1,54 @@
+{
+  "entity": {
+    "sensor": {
+      "humidity": {
+        "name": "Humedad ambiente"
+      },
+      "target_humidity": {
+        "name": "Consigna de humedad"
+      },
+      "timer_hours": {
+        "name": "Duración del temporizador"
+      },
+      "mode": {
+        "name": "Modo",
+        "state": {
+          "auto": "Auto",
+          "sleep": "Modo sueño",
+          "dry": "Modo secado de colada",
+          "custom": "Personalizado"
+        }
+      },
+      "fan_speed": {
+        "name": "Velocidad del ventilador",
+        "state": {
+          "low": "Baja",
+          "high": "Alta"
+        }
+      }
+    },
+    "binary_sensor": {
+      "auto_air_dry": {
+        "name": "Secado automático tras apagado"
+      },
+      "air_drying": {
+        "name": "Secado de aire"
+      },
+      "key_tone": {
+        "name": "Tono de tecla"
+      },
+      "child_lock": {
+        "name": "Bloqueo infantil"
+      },
+      "timer_on": {
+        "name": "Temporizador activo"
+      },
+      "plasma": {
+        "name": "Plasma"
+      },
+      "swing": {
+        "name": "Oscilación"
+      }
+    }
+  }
+}

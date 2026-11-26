@@ -1,0 +1,123 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Sign in to Dreamehome",
+        "description": "Use the email and password of your Dreamehome account. The integration works through Dreame's cloud, so it needs internet access.\n\n**Sign in to Dreamehome with Google or Apple?** Those can't be used here. Add a password to your account first: in the Dreamehome app, open **Profile → Settings → Account and Security** and set a password.",
+        "data": {
+          "username": "Email",
+          "password": "Password",
+          "region": "Region"
+        },
+        "data_description": {
+          "region": "The region your Dreamehome account was created in."
+        }
+      },
+      "device": {
+        "title": "Choose a dehumidifier",
+        "data": {
+          "did": "Dehumidifier"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Sign in again",
+        "description": "Dreame rejected the saved password for {username}. Enter the current one.",
+        "data": {
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Dreame rejected the email or password. Check the region too. After several failed attempts Dreame may block sign-in for about an hour.",
+      "cannot_connect": "Couldn't reach Dreame's cloud. Try again in a moment."
+    },
+    "abort": {
+      "already_configured": "This dehumidifier is already set up.",
+      "no_devices": "No dehumidifiers that aren't already set up were found on this account.",
+      "reauth_successful": "Signed in again."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Dreame Dehumidifier options",
+        "data": {
+          "scan_interval": "Update interval"
+        },
+        "data_description": {
+          "scan_interval": "How often to read the dehumidifier. Shorter intervals mean more requests to Dreame's cloud."
+        }
+      }
+    }
+  },
+  "selector": {
+    "region": {
+      "options": {
+        "eu": "Europe",
+        "us": "Americas",
+        "sg": "Asia-Pacific",
+        "ru": "Russia",
+        "kr": "South Korea",
+        "cn": "Mainland China"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "humidity": {
+        "name": "Humidity"
+      },
+      "target_humidity": {
+        "name": "Target humidity"
+      },
+      "timer_hours": {
+        "name": "Timer duration"
+      },
+      "mode": {
+        "name": "Mode",
+        "state": {
+          "auto": "Auto",
+          "sleep": "Sleep",
+          "dry": "Laundry drying",
+          "custom": "Custom"
+        }
+      },
+      "fan_speed": {
+        "name": "Fan speed",
+        "state": {
+          "low": "Low",
+          "high": "High"
+        }
+      }
+    },
+    "binary_sensor": {
+      "auto_air_dry": {
+        "name": "Automatic air drying"
+      },
+      "air_drying": {
+        "name": "Air drying"
+      },
+      "key_tone": {
+        "name": "Key tone"
+      },
+      "child_lock": {
+        "name": "Child lock"
+      },
+      "timer_on": {
+        "name": "Timer active"
+      },
+      "plasma": {
+        "name": "Plasma"
+      },
+      "swing": {
+        "name": "Oscillation"
+      }
+    }
+  },
+  "issues": {
+    "unsupported_model": {
+      "title": "{name} isn't supported yet",
+      "description": "There is no verified read-only profile for model {model} in this laboratory integration."
+    }
+  }
+}

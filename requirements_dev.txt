@@ -1,0 +1,4 @@
+# The official fixtures must match the Home Assistant Core version under test.
+pytest-homeassistant==2026.11.3
+ruff
+mypy
