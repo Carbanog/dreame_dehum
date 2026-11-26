@@ -1,6 +1,14 @@
 {
   "entity": {
     "sensor": {
+      "power": {
+        "name": "Estado de encendido",
+        "state": {
+          "off": "Apagado",
+          "preheating": "Precalentando",
+          "on": "Encendido"
+        }
+      },
       "humidity": {
         "name": "Humedad ambiente"
       },

@@ -13,7 +13,7 @@ Esta copia y la integración de origen comparten el dominio `dreame_dehum`. Usa 
 
 ## Lecturas disponibles
 
-- Encendido y apagado según el estado del aparato. El secado de aire se muestra por separado.
+- Estado de encendido con las fases Apagado, Precalentando y Encendido. El sensor binario Encendido se activa desde el precalentamiento. El secado de aire tiene su propio sensor.
 - Humedad ambiente y consigna. La consigna se comprobó en Personalizado.
 - Modo y velocidad del ventilador.
 - Estado de la oscilación, plasma, tono de tecla y bloqueo infantil.

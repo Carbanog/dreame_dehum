@@ -44,7 +44,7 @@ async def test_setup_creates_only_verified_read_only_entities(hass: HomeAssistan
     }
 
     registered = er.async_entries_for_config_entry(er.async_get(hass), entry.entry_id)
-    assert len(registered) == 13
+    assert len(registered) == 14
     assert {entity.entity_id.partition(".")[0] for entity in registered} == {"sensor", "binary_sensor"}
     assert hass.states.get(HUMIDITY_SENSOR).state == "70"
     assert hass.states.get("sensor.test_dehumidifier_target_humidity").state == "55"
@@ -65,16 +65,23 @@ async def test_refresh_updates_the_mode_and_timer(hass: HomeAssistant, cloud: Fa
     assert not cloud.writes
 
 
-async def test_power_sensor_keeps_on_off_and_unknown_distinct(hass: HomeAssistant, cloud: FakeCloud) -> None:
+async def test_power_sensors_report_preheating_and_keep_unknown_distinct(hass: HomeAssistant, cloud: FakeCloud) -> None:
     entry = await _setup(hass)
     power = "binary_sensor.test_dehumidifier_power"
-    assert hass.states.get(power).state == "on"
+    power_state = "sensor.test_dehumidifier_power_state"
 
-    for code, expected in ((2, "off"), (0, "unknown"), (True, "unknown"), (1, "on")):
+    for code, binary_state, enum_state in (
+        (2, "off", "off"),
+        (3, "on", "preheating"),
+        (1, "on", "on"),
+        (0, "unknown", "unknown"),
+        (True, "unknown", "unknown"),
+    ):
         cloud.values[(2, 1)] = code
         await entry.runtime_data.async_refresh()
         await hass.async_block_till_done()
-        assert hass.states.get(power).state == expected
+        assert hass.states.get(power).state == binary_state
+        assert hass.states.get(power_state).state == enum_state
 
     assert not cloud.writes
 

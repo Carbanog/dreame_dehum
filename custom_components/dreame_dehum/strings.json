@@ -64,6 +64,14 @@
   },
   "entity": {
     "sensor": {
+      "power": {
+        "name": "Power state",
+        "state": {
+          "off": "Off",
+          "preheating": "Preheating",
+          "on": "On"
+        }
+      },
       "humidity": {
         "name": "Humidity"
       },

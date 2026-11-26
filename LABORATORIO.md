@@ -19,7 +19,7 @@ Para retirar la copia, elimina la entrada de integración en el Home Assistant d
 
 ## Alcance del paquete
 
-El paquete monta únicamente las plataformas `sensor` y `binary_sensor`. El cliente acepta solo `get_properties`. El perfil incluye 12 propiedades contrastadas con la app y el estado de encendido `2.1` documentado por el proyecto de referencia para el DD20 exacto. El estado del prefiltro y la conexión local siguen pendientes. Véase [el perfil de referencia](https://github.com/vittorioallegra/ha-dreame-dehum/blob/2f67f6266328d2b3ef1da28579fe6fce38fc16fe/custom_components/dreame_dehum/profiles.py#L118-L125).
+El paquete monta únicamente las plataformas `sensor` y `binary_sensor`. El cliente acepta solo `get_properties`. El perfil incluye 12 propiedades contrastadas con la app y el estado de encendido `2.1` documentado por el proyecto de referencia para el DD20 exacto. En una transición observada, la propiedad valió `3` durante Precalentando y pasó a `1` al mostrar Encendido. Los dos sensores de encendido comparten esa lectura. El estado del prefiltro y la conexión local siguen pendientes. Véase [el perfil de referencia](https://github.com/vittorioallegra/ha-dreame-dehum/blob/2f67f6266328d2b3ef1da28579fe6fce38fc16fe/custom_components/dreame_dehum/profiles.py#L118-L125).
 
 ## Prueba aislada
 

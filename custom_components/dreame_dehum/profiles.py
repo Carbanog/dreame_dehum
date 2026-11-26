@@ -84,6 +84,7 @@ class Profile:
 
 
 DD20_AUTO, DD20_SLEEP, DD20_DRY, DD20_CUSTOM = 0, 1, 2, 3
+_DD20_POWER_ON, _DD20_POWER_OFF, _DD20_PREHEATING = 1, 2, 3
 
 # The lab polls addresses checked against the app or the upstream DD20 profile.
 DD20 = Profile(
@@ -91,7 +92,13 @@ DD20 = Profile(
     name="DD20",
     status=Status.MAPPED,
     props=(
-        Prop("power", 2, 1, Kind.BINARY_SENSOR),
+        Prop(
+            "power",
+            2,
+            1,
+            Kind.BINARY_SENSOR,
+            options={_DD20_POWER_OFF: "off", _DD20_PREHEATING: "preheating", _DD20_POWER_ON: "on"},
+        ),
         Prop(
             "mode",
             2,
@@ -111,6 +118,8 @@ DD20 = Profile(
         Prop("plasma", 7, 6, Kind.BINARY_SENSOR),
         Prop("swing", 7, 7, Kind.BINARY_SENSOR),
     ),
+    power_on=_DD20_POWER_ON,
+    power_off=_DD20_POWER_OFF,
     manual_mode=DD20_CUSTOM,
     humidity_step=5,
 )
