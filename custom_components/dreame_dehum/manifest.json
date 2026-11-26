@@ -1,6 +1,7 @@
 {
   "domain": "dreame_dehum",
   "name": "Dreame Dehumidifier",
+  "categories": ["climate.air_purifiers_humidifiers"],
   "codeowners": ["@Carbanog"],
   "config_flow": true,
   "dependencies": [],
