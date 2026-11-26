@@ -1,102 +1,28 @@
-# Dreame Dehumidifier for Home Assistant
+# Dreame Deshumidificador para Home Assistant
 
-> Read-only laboratory copy based on upstream v0.1.7. The tables and HACS
-> instructions below describe the upstream project. For this copy, use
-> [the laboratory installation notes](LABORATORIO.md).
+Versión experimental de solo lectura para el Dreame DD20 (`dreame.dehum.u2512`). La integración lee el estado mediante la nube de Dreamehome. La versión de laboratorio se verificó con Home Assistant Core 2026.11.3 y datos simulados.
 
-A custom integration for Dreame dehumidifiers that are set up in the
-**Dreamehome** app. It talks to Dreame's cloud, the same way the app does.
+## Instalación en Home Assistant de pruebas
 
-Not affiliated with Dreame.
+1. En HACS, abre el menú **⋮ → Repositorios personalizados**.
+2. Añade `https://github.com/Carbanog/dreame_dehum` con el tipo **Integración**.
+3. Descarga **Dreame Dehumidifier** y reinicia Home Assistant de pruebas.
+4. En **Ajustes → Dispositivos y servicios → Añadir integración**, selecciona **Dreame Dehumidifier**. Introduce las credenciales de Dreamehome en Home Assistant y elige la región de tu cuenta.
 
-## Supported models
+Esta copia y la integración de origen comparten el dominio `dreame_dehum`. Usa un entorno de pruebas donde no tengas instalada la integración de origen. Para una instalación manual o para retirar la copia, consulta [las instrucciones de laboratorio](LABORATORIO.md).
 
-| Model | ID | Status |
-|---|---|---|
-| DD20 | `dreame.dehum.u2512` | Reads and writes confirmed on a real unit |
+## Lecturas disponibles
 
-Other Dreame dehumidifiers can be added from the account, but they get no
-entities until they have a profile: sending one model's commands to another can
-upset some Dreame devices, so the integration doesn't guess. See
-[Adding a model](#adding-a-model).
+- Humedad ambiente y consigna. La consigna se comprobó en Personalizado.
+- Modo y velocidad del ventilador.
+- Estado de la oscilación, plasma, tono de tecla y bloqueo infantil.
+- Duración y estado del temporizador.
+- Estado del secado de aire y ajuste de secado automático tras apagado.
 
-## What you get (DD20)
+El acceso local y el estado del prefiltro siguen pendientes.
 
-| Entity | Type | Property |
-|---|---|---|
-| Dehumidifier: on/off, mode (Auto, Sleep, Dry, Custom), target humidity 30–80 % | `humidifier` | 2/1, 2/3, 2/5 |
-| Fan speed (Low, High; switches to Custom first) | `select` | 2/4 |
-| Humidity, temperature | `sensor` | 3/2, 3/3 |
-| Child lock, plasma, swing, key tone, auto air drying on power-off | `switch` | 5/1, 7/6, 7/7, 4/1, 2/6 |
-| Air drying: start or stop the 40 minute self-drying cycle (starts only while the unit is on) | `switch` | 2/10 |
-| Water tank alert (on when the tank is full or out) | `binary_sensor` | 2/2 |
-| Air drying time remaining and duration | `sensor` | 2/7, 7/8 |
-| Timer in hours (1-12, 0 cancels) and whether it is active | `number`, `binary_sensor` | 7/2, 7/1 |
+## Privacidad y licencia
 
-Known gaps on the DD20:
+Home Assistant guarda las credenciales de Dreamehome en la entrada de configuración de la integración. Los diagnósticos solo incluyen el modelo y el estado del perfil. El repositorio contiene exclusivamente datos de prueba sintéticos.
 
-- No drying/idle state: the unit doesn't report whether its compressor runs.
-- Property 7/3 holds the place name set in the app. It is never read.
-
-## Installation
-
-### HACS
-
-1. HACS → ⋮ → **Custom repositories** → add this repository's URL as an
-   **Integration**.
-2. Install **Dreame Dehumidifier** and restart Home Assistant.
-
-### Manual
-
-Copy `custom_components/dreame_dehum` into your Home Assistant
-`config/custom_components` folder and restart.
-
-## Setup
-
-**Settings → Devices & services → Add integration → Dreame Dehumidifier**, then
-sign in with your Dreamehome email and password and pick the region your
-account was created in.
-
-If you sign in to the app with Google or Apple, add a password to the account
-first: in the Dreamehome app, **Profile → Settings → Account and Security**.
-
-Options: the update interval (default 30 s).
-
-## Privacy
-
-The integration stores your Dreamehome email and password in Home Assistant's
-config entry. The password is sent to Dreame as the salted hash the app uses.
-This copy exports only the known model and profile status in diagnostics. It
-does not poll the serial number or unmapped properties, or store the MAC for
-new entries.
-
-## Adding a model
-
-`tools/probe.py` maps a dehumidifier from a computer, with the standard library
-only:
-
-```bash
-python3 tools/probe.py list
-python3 tools/probe.py sweep --did <device id>   # which properties exist (reads only)
-python3 tools/probe.py learn --did <device id>   # what each one means (reads only)
-```
-
-`learn` walks you through changing one setting at a time in the Dreamehome app
-and records which properties changed. Both reports leave out account and
-device identifiers and replace text values with their length; check them
-before attaching them to an issue. Then add a `Profile` in
-`custom_components/dreame_dehum/profiles.py`.
-
-`python3 tools/probe.py write --did <id> 2/5 55` writes one property and reads
-it back, to confirm a write works. It asks before writing.
-
-## Credits
-
-The Dreame cloud client and the structure of this integration are adapted from
-[ha-dreame-air](https://github.com/MrJiggs0003/ha-dreame-air) (MIT), which
-builds on [ha-dreame-fp10](https://github.com/yarimati/ha-dreame-fp10) (MIT).
-See `NOTICE`.
-
-## License
-
-MIT
+Adaptado de [ha-dreame-dehum v0.1.7](https://github.com/vittorioallegra/ha-dreame-dehum/releases/tag/v0.1.7). Consulta [LICENSE](LICENSE), [NOTICE](NOTICE) y [la revisión de origen](REVISION_UPSTREAM).
