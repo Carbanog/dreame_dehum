@@ -1,6 +1,6 @@
 [project]
 name = "ha-dreame-dehum"
-version = "0.1.7+lab.1"
+version = "0.1.7+lab.2"
 description = "Home Assistant integration for Dreame dehumidifiers"
 requires-python = ">=3.14"
 

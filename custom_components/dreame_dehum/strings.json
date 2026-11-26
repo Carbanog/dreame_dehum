@@ -91,6 +91,9 @@
       }
     },
     "binary_sensor": {
+      "power": {
+        "name": "Power"
+      },
       "auto_air_dry": {
         "name": "Automatic air drying"
       },

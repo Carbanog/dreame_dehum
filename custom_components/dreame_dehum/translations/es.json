@@ -28,6 +28,9 @@
       }
     },
     "binary_sensor": {
+      "power": {
+        "name": "Encendido"
+      },
       "auto_air_dry": {
         "name": "Secado automático tras apagado"
       },

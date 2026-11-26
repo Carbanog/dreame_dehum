@@ -85,12 +85,13 @@ class Profile:
 
 DD20_AUTO, DD20_SLEEP, DD20_DRY, DD20_CUSTOM = 0, 1, 2, 3
 
-# The lab polls only addresses independently checked against the Dreamehome app.
+# The lab polls addresses checked against the app or the upstream DD20 profile.
 DD20 = Profile(
     model="dreame.dehum.u2512",
     name="DD20",
     status=Status.MAPPED,
     props=(
+        Prop("power", 2, 1, Kind.BINARY_SENSOR),
         Prop(
             "mode",
             2,

@@ -39,6 +39,11 @@ class DreameDehumBinarySensor(DreameDehumEntity, BinarySensorEntity):
     @property
     def is_on(self) -> bool | None:
         value = self.raw_value
+        if self._key == "power":
+            # The DD20 uses 1 for on and 2 for off, unlike its 0/1 options.
+            if type(value) is not int or value not in (self.profile.power_on, self.profile.power_off):
+                return None
+            return value == self.profile.power_on
         if not isinstance(value, (int, bool)) or value not in (0, 1):
             return None
         return bool(value)

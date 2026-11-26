@@ -28,6 +28,9 @@
       }
     },
     "binary_sensor": {
+      "power": {
+        "default": "mdi:power"
+      },
       "timer_on": {
         "default": "mdi:timer-outline",
         "state": {
